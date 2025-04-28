@@ -1,0 +1,33 @@
+/* assets/style.css */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background: #f4f4f4;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+section {
+  margin: 20px;
+  padding: 10px;
+}
+
+form input, form textarea {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  padding: 10px;
+}
+
+form button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  cursor: pointer;
+}

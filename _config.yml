@@ -1,0 +1,11 @@
+# _config.yml
+title: "우리의 모바일 청첩장"
+author: "이름"
+description: "우리의 특별한 날에 초대합니다!"
+baseurl: ""
+url: "https://han77yb.github.io"
+
+# 데이터 폴더
+collections:
+  comments:
+    output: false

@@ -1,0 +1,1211 @@
+@font-face {
+  font-family: "S-CoreDream-4Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body {
+  overflow-x: hidden; /* 가로 스크롤 숨기기 */
+  /* 필요하다면 아래 touch-action 도 추가 */
+  touch-action: pan-y; /* 수직 스크롤만 허용 (수평 스크롤 및 핀치 줌 제한) */
+
+  /* 참고: 기존 body 스타일에 이미 margin: 0; 이 있으므로 유지 */
+}
+
+body {
+  font-family: "S-CoreDream-4Regular";
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #333;
+}
+header {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fff;
+  border-bottom: 2px solid #e8e8e8;
+}
+header h1 {
+  margin: 0;
+  font-size: 2.8em;
+  color: #5a8563;
+}
+header p {
+  font-size: 1.2em;
+  margin-top: 10px;
+  color: #6d9b7a;
+}
+section {
+  margin: 20px auto;
+  max-width: 900px;
+  padding: 20px;
+  background-color: #fff;
+  margin-bottom: 2rem;
+  #border-radius: 10px;
+  #box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+/* 연락처 섹션 */
+.contacts {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+.contact-card {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+.contact-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+.contact-card h3 {
+  font-size: 1.3em;
+  margin: 10px 0;
+  color: #5a8563;
+}
+.contact-card a {
+  display: block;
+  margin: 5px 0;
+  font-size: 0.95em;
+  text-decoration: none;
+  color: #5a8563;
+}
+.contact-card a:hover {
+  text-decoration: underline;
+}
+/* 축하 메시지 섹션 */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+form input,
+form textarea {
+  font-size: 1em;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+form textarea {
+  resize: none;
+}
+form button {
+  background-color: #6d9b7a;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+form button:hover {
+  background-color: #5a8563;
+}
+
+form,
+#output2 {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+form.visible,
+#output2.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.message {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+/* 제목 세션 */
+.chapter {
+  margin: 20px 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+.chapter button {
+  font-family: "S-CoreDream-4Regular";
+  width: 90%;
+  padding: 15px;
+  font-size: calc(1.2rem + 0.6vw);
+  text-align: center;
+  background-color: #E8DFDF;
+  color: #000;
+  border: none;
+  border-radius: 5em;
+  cursor: pointer;
+  letter-spacing: calc(0.4rem + 0.2vw);
+  font-weight: 700;
+}
+.chapter button:hover {
+  /*background-color: #5a8563;*/
+  /*  background-color: #6d9b7a;         
+  color: #fff;                   */
+}
+.chapter.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* 축의금 섹션 */
+.accordion {
+  margin: 20px 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+.accordion button {
+  font-family: "S-CoreDream-4Regular";
+  width: 90%;
+  padding: 15px;
+  font-size: 1em;
+  text-align: center;
+
+    background-color: #fff;
+  color: #D1C8C8;          
+  border: 2px solid #D1C8C8; 
+  border-radius: 5em;
+  cursor: pointer;
+}
+.accordion button:hover {
+  /*background-color: #5a8563;*/
+  /*  background-color: #6d9b7a;         
+  color: #fff;                   */
+}
+.accordion.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.accordion-content {
+  display: none;
+  margin-top: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+.accordion-content.active {
+  display: block;
+}
+/* 계좌번호 및 복사 버튼 스타일 */
+.account-item {
+  font-family: "S-CoreDream-4Regular";
+  margin: 10px 0;
+  display: block;
+  align-items: center;
+  gap: 300px;
+  #margin-bottom: 10px;
+}
+.account-info {
+  font-family: "S-CoreDream-4Regular";
+  gap: 300px;
+  margin-top: 10px;
+  #width: 300px;
+  height: 50px;
+  position: relative;
+  display: flex;
+}
+.account-info input {
+  font-family: "S-CoreDream-4Regular";
+  width: 100%;
+  border-radius: 15px;
+  font-size: 0.8em;
+}
+.account-info button {
+  font-family: "S-CoreDream-4Regular";
+  width: 25%;
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  right: 3%;
+  border-radius: 10%;
+  font-size: clamp(0.8em, 2vw, 1em);
+  /* 화면 크기에 따라 폰트 크기 조정 */
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  /* 텍스트 줄바꿈 방지 */
+  overflow: hidden;
+  /* 텍스트 넘침 숨김 */
+  text-overflow: ellipsis;
+  /* 텍스트 넘침 시 ... 표시 */
+}
+.copy-button2 {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: #6d9b7a;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+.copy-button2:hover {
+  background-color: #5a8563;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f0f0f0;
+  color: #777;
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+}
+.fullscreen-image {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 1.5s ease-in-out;
+  z-index: 0;
+}
+.fullscreen-image img {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.wedding-text {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Dancing Script", cursive;
+  font-size: calc(3rem + 1.5vw);
+  color: #e5135a;
+  text-shadow: 0px 0px 5px white, 0px 0px 10px white;
+  opacity: 0;
+  animation: slideDown 1.5s ease-in-out 1.5s forwards;
+}
+.names-container {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeInNames 1.5s ease-in-out 2s forwards;
+}
+.name-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 40px;
+  text-align: center;
+  white-space: nowrap;
+}
+.name-block .name.english {
+  font-family: "Great Vibes", cursive;
+  font-size: calc(1rem + 0.5vw);
+  color: black;
+  margin-bottom: 5px;
+  text-shadow: 0px 0px 5px white, 0px 0px 10px white;
+}
+.name-block .name.korean {
+  font-size: calc(1.2rem + 0.7vw);
+  color: black;
+  text-shadow: 0px 0px 5px white, 0px 0px 10px white;
+}
+.divider {
+  width: 2px;
+  height: 50px;
+  background-color: black;
+  box-shadow: 0px 0px 5px white, 0px 0px 10px white;
+  margin: 0 auto;
+  /* 센터 정렬을 원할 경우 추가 */
+}
+.date-text {
+  position: absolute;
+  bottom: 13%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 400;
+  font-size: calc(0.8rem + 0.4vw);
+  color: #D1C8C8;
+  white-space: nowrap;
+  /* 개행을 막기 위해 nowrap 설정 */
+  overflow: hidden;
+  /* 텍스트가 넘칠 경우 숨김 처리 */
+  text-overflow: ellipsis;
+  /* 넘치는 텍스트를 ...으로 표시 */
+  text-align: center;
+  /* 중앙 정렬 */
+  opacity: 0;
+  animation: fadeInDate 1.5s ease-in-out 2.5s forwards;
+  max-width: 90%;
+  /* 컨테이너 최대 폭 설정 */
+}
+.place-text {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 400;
+  font-size: calc(0.8rem + 0.4vw);
+  color: #D1C8C8;
+  white-space: nowrap;
+  /* 개행을 막기 위해 nowrap 설정 */
+  overflow: hidden;
+  /* 텍스트가 넘칠 경우 숨김 처리 */
+  text-overflow: ellipsis;
+  /* 넘치는 텍스트를 ...으로 표시 */
+  text-align: center;
+  /* 중앙 정렬 */
+  opacity: 0;
+  animation: fadeInDate 1.5s ease-in-out 2.5s forwards;
+  max-width: 90%;
+  /* 컨테이너 최대 폭 설정 */
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideDown {
+  0% {
+    top: 5%;
+    opacity: 0;
+  }
+  100% {
+    top: 10%;
+    opacity: 1;
+  }
+}
+@keyframes fadeInNames {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeInDate {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-aspect-ratio: 1/1) {
+  .fullscreen-image img {
+    width: 100%;
+    height: auto;
+  }
+}
+@media (min-aspect-ratio: 1/1) {
+  .fullscreen-image img {
+    width: auto;
+    height: 100%;
+  }
+}
+.custom-text {
+  line-height: 1.5;
+  position: relative;
+  margin: 2px auto;
+  max-width: 90%;
+  padding: 2px;
+  text-align: center;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-size: calc(0.8rem + 0.5vw);
+  color: #333;
+  background-color: white;
+  z-index: 0;
+}
+.custom-text span {
+  display: block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+.custom-text span.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.custom-textc {
+  line-height: 1.5;
+  position: relative;
+  margin: 2px auto;
+  max-width: 90%;
+  padding: 2px;
+  text-align: center;
+  font-optical-sizing: auto;
+  font-family: "Jua", sans-serif;
+  font-weight: 400;
+  font-size: calc(0.8rem + 0.5vw);
+  color: #333;
+  background-color: white;
+  z-index: 0;
+}
+.custom-textc span {
+  display: block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+.custom-textc span.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.custom-textb {
+  line-height: 1.5;
+  position: relative;
+  margin: 2px auto;
+  max-width: 90%;
+  padding: 2px;
+  text-align: center;
+  font-size: calc(0.8rem + 0.5vw);
+  color: #333;
+  background-color: white;
+  z-index: 0;
+}
+.custom-textb span {
+  display: block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+.custom-textb span.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.custom-picture0 {
+  display: block;
+  margin: 0 auto 20px;
+  max-width: 100%;
+  height: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+  z-index: 0;
+}
+.custom-picture0.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.custom-picture {
+  display: block; /* block 레벨로 변경 */
+  /* margin: 0 auto 20px; */ /* 갤러리 내에서는 다른 margin 적용 */
+  max-width: 100%; /* 부모 요소 너비에 맞춤 */
+  height: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+  z-index: 0; /* 유지 */
+  cursor: pointer; /* 클릭 가능 표시 */
+  border-radius: 8px; /* 약간의 둥근 모서리 (선택 사항) */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 (선택 사항) */
+}
+.custom-picture.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* --- 이미지 갤러리 스타일 --- */
+.image-gallery-container {
+  display: flex; /* 가로 배치 */
+  justify-content: space-around; /* 이미지 주변에 공간 배분 */
+  /* justify-content: center; */ /* 중앙 정렬 */
+  /* justify-content: space-between; */ /* 양 끝에 붙이고 사이 공간 균등 배분 */
+  gap: 15px; /* 이미지 사이의 간격 */
+  flex-wrap: wrap; /* 화면 작을 때 줄바꿈 허용 */
+  padding: 10px; /* 컨테이너 내부 여백 */
+  max-width: 900px; /* 섹션과 유사하게 최대 너비 설정 */
+  margin: 0 auto 20px; /* 좌우 자동 마진 및 하단 마진 */
+}
+
+.gallery-thumbnail {
+  flex: 1 1 calc(33.333% - 20px); /* 기본적으로 3개씩, 간격 고려하여 크기 조절 (gap에 따라 조정) */
+  /* flex: 0 0 180px; */ /* 고정 너비 사용 시 */
+  max-width: calc(33.333% - 10px); /* 최대 너비도 제한 (gap 고려) */
+  /* max-width: 200px; */ /* 고정 최대 너비 사용 시 */
+  box-sizing: border-box;
+  /* 내부 이미지에 그림자/테두리 적용 시 여기보다 img에 적용하는게 나을 수 있음 */
+}
+
+/* 갤러리 내 이미지에 대한 추가 스타일 (선택 사항) */
+.gallery-thumbnail .custom-picture {
+  margin-bottom: 0; /* 컨테이너에서 마진 관리하므로 제거 */
+}
+
+section {
+  text-align: center;
+}
+.falling {
+  position: absolute;
+  background-image: url("picture/leafp.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear infinite;
+  z-index: 1;
+}
+@keyframes fall {
+  0% {
+    transform: translateY(calc(var(--start-y) * 1vh)) rotate(var(--rotation)) scale(var(--scale));
+    opacity: var(--opacity);
+  }
+  50% {
+    transform: translateX(calc(var(--start-x) * 1vw + var(--offset-x) * 0.5vw)) translateY(50vh) rotate(calc(var(--rotation) + 180deg)) scale(var(--scale));
+    opacity: var(--opacity);
+  }
+  100% {
+    transform: translateX(calc(var(--start-x) * 1vw + var(--offset-x) * 1vw)) translateY(50vh) rotate(calc(var(--rotation) + 360deg)) scale(var(--scale));
+    opacity: var(--opacity);
+  }
+}
+
+.simple_line {
+  border-top: 2px solid #ddd;
+  width: 90%;
+  margin: 30px auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+.simple_line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.blur {
+  filter: blur(100%);
+  pointer-events: none;
+}
+
+.contact-button {
+  display: inline-block;
+  background-color: white;
+  color: black;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  width: 50%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.contact-button:hover {
+  background-color: #fff;
+}
+.contact-button.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+}
+
+.modal-overlay.active {
+  visibility: visible;
+  opacity: 1;
+  z-index: 10;
+}
+
+/* 이미지 모달 컨텐츠 영역 스타일 (크기 제한 제거 또는 완화) */
+.image-modal-content {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  /* max-width, max-height 제한은 내부 이미지에서 직접 처리 */
+  /* width, height도 auto 또는 제거 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* 닫기 버튼 위치 기준 */
+}
+
+/* 모달 내부 이미지 스타일 수정 (핵심!) */
+#modalImage {
+  display: block;
+  /* 최대 크기를 뷰포트 너비/높이의 70%로 제한 */
+  max-width: 70vw; /* 화면 너비의 70% */
+  max-height: 70vh; /* 화면 높이의 70% */
+  /* 너비/높이는 자동으로 계산되도록 */
+  width: auto;
+  height: auto;
+  /* 이미지 비율 유지 */
+  object-fit: contain;
+  /* 그림자 등 추가 효과 (선택 사항) */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 4px; /* 약간의 둥근 모서리 (선택 사항) */
+}
+
+/* 모달 닫기 버튼 스타일 (위치 조정 가능) */
+.close-modal-button {
+  position: absolute;
+  /* 이미지 오른쪽 위에 위치하도록 조정 */
+  top: -5px; /* 약간 위로 */
+  right: -5px; /* 약간 오른쪽으로 */
+  background: white;
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1051;
+}
+.close-modal-button:hover {
+  background-color: #f0f0f0;
+}
+
+.modal h2 {
+  margin: 0;
+  font-size: 20px;
+  padding: 10px 0;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+}
+
+.contact-list {
+  padding: 10px 0;
+}
+
+.contact-group {
+  margin-bottom: 15px;
+}
+
+.contact-group:last-child {
+  margin-bottom: 0;
+}
+
+.contact-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.contact-item:last-child {
+  border-bottom: none;
+}
+
+.contact-label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #004667;
+  text-align: left;
+}
+.contact-label-bride {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ba4609;
+  text-align: left;
+}
+
+.contact-name {
+  color: #333;
+  text-align: left;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.contact-actions a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.contact-picture {
+  width: 1rem;
+}
+
+.contact-picture2 {
+  width: 1.5rem;
+}
+
+.gallery-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.gallery-wrapper {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.gallery-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+.gallery-slide img {
+  width: 100%;
+  height: auto;
+}
+
+.indicator-container {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: gray;
+  transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+  background-color: black;
+}
+#audio-widget-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.85); /* 배경 약간 더 불투명하게 (선택 사항) */
+  padding: 8px 15px; /* 패딩 조정 */
+  border-radius: 25px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 텍스트 정보 그룹 (선택 사항) */
+.audio-text-info {
+  display: flex;
+  flex-direction: column; /* 텍스트를 세로로 쌓을 경우 */
+  /* 또는 flex-direction: row; 로 가로 배치 유지 */
+  align-items: flex-start; /* 왼쪽 정렬 (세로 쌓기 시) */
+  margin-right: 10px; /* 버튼과의 간격 */
+}
+
+.audio-label {
+  /* margin-right: 8px; */ /* text-info 그룹 사용 시 제거 또는 조정 */
+  font-size: 14px;
+  color: #333; /* 색상 약간 진하게 */
+  font-weight: bold;
+  user-select: none;
+  /* line-height: 1; */ /* 세로 쌓기 시 줄간격 조절 */
+}
+
+.song-title {
+  font-size: 11px; /* 라벨보다 작게 */
+  color: #666; /* 약간 연한 회색 */
+  /* margin-right: 10px; */ /* text-info 그룹 사용 시 제거 또는 조정 */
+  /* font-style: italic; */ /* 기울임꼴 (선택 사항) */
+  white-space: nowrap; /* 줄바꿈 방지 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px; /* 너무 길어지지 않도록 최대 너비 설정 (조절 필요) */
+  user-select: none;
+  /* line-height: 1.2; */ /* 세로 쌓기 시 줄간격 조절 */
+  margin-top: 2px; /* 라벨과의 세로 간격 (세로 쌓기 시) */
+}
+
+/* 기존 .audio-control 스타일 유지 또는 일부 수정 */
+/*.audio-control {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background: #e0e5ec;
+  border-radius: 50%;
+  box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+  text-align: center;
+  line-height: 35px; 
+  font-size: 16px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, background-color 0.3s, color 0.3s;
+  user-select: none;
+  
+}
+*/
+
+.audio-control:active {
+  /* 기존 active 스타일 유지 */
+  box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+  transform: scale(0.95);
+}
+
+/* (선택 사항) 재생 상태일 때 시각적 변화 */
+.audio-control.playing {
+  background-color: #c3e8c4; /* 연한 녹색 배경 */
+  box-shadow: inset 3px 3px 6px #a6c4a7, inset -3px -3px 6px #e0ffe1; /* 눌린 듯한 효과 */
+}
+
+/* 기존 hover 효과는 제거하거나 상태별로 다르게 적용 가능 */
+/*
+.audio-control:hover {
+  background-color: #d1d9e6;
+}
+*/
+
+.share-container {
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+}
+.share-container h2 {
+  margin-bottom: 10px;
+}
+.share-container p {
+  margin-bottom: 20px;
+  color: #555;
+}
+.share-buttons {
+  font-family: "S-CoreDream-4Regular";
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.btn {
+  font-family: "S-CoreDream-4Regular";
+  border: none;
+  border-radius: 30px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+.btn:hover {
+  transform: scale(1.05);
+}
+.btn-copy {
+  background-color: #e0e0e0;
+  color: #333;
+}
+.btn-kakao {
+  font-family: "S-CoreDream-4Regular";
+  background-color: #f7e600;
+  color: #3c1e1e;
+}
+
+/* 슬라이더 영역에 한정된 스타일 */
+#gallery-slider .gallery-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+#gallery-slider .gallery-wrapper {
+  display: flex;
+  transition: transform 0.5s ease;
+  touch-action: pan-x pan-y;
+}
+
+#gallery-slider .gallery-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+}
+
+#gallery-slider .gallery-slide img {
+  width: 100%;
+  height: auto;
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+#gallery-slider .indicator-container {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+
+#gallery-slider .indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: gray;
+  transition: background-color 0.3s ease;
+}
+
+#gallery-slider .indicator.active {
+  background-color: black;
+}
+
+/* ✨ --- Autoplay Overlay Styles --- ✨ */
+#autoplay-overlay {
+  position: fixed; /* 화면 전체에 고정 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2); /* 약간 어두운 반투명 배경 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* 다른 모든 요소 위에 표시 */
+  cursor: pointer;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out; /* 부드러운 사라짐 효과 */
+}
+
+#autoplay-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none; /* 숨겨진 상태에서는 클릭 이벤트 받지 않음 */
+}
+
+.overlay-content {
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+
+.overlay-content p {
+  font-size: 1.2em; /* 폰트 크기 조정 */
+  line-height: 1.6;
+  margin-bottom: 30px; /* 스크롤 표시와의 간격 증가 */
+}
+
+/* 👇 삭제: .overlay-content .touch-icon {...} */
+/* 👇 삭제: @keyframes bounce {...} */
+
+/* ✨ 추가: 스크롤 다운 표시 스타일 ✨ */
+.scroll-down-indicator {
+  position: relative; /* 내부 span 위치 기준 (필요시) */
+  width: 24px; /* 인디케이터 전체 너비 */
+  height: 40px; /* 인디케이터 전체 높이 (애니메이션 공간 포함) */
+  margin: 0 auto; /* 수평 중앙 정렬 */
+}
+
+.scroll-down-indicator span {
+  position: absolute; /* 컨테이너 내에서 위치 조정 */
+  left: 50%; /* 수평 중앙 */
+  width: 18px; /* 쉐브론 크기 */
+  height: 18px; /* 쉐브론 크기 */
+  margin-left: -9px; /* 너비의 절반만큼 왼쪽으로 이동하여 중앙 정렬 */
+  border-left: 2px solid white; /* 쉐브론 왼쪽 선 */
+  border-bottom: 2px solid white; /* 쉐브론 아래쪽 선 */
+  transform: rotate(-45deg); /* 45도 회전하여 쉐브론 모양 만들기 */
+  opacity: 0; /* 초기 상태는 투명 */
+  animation: scrollDownPulse 2s infinite; /* 애니메이션 적용 */
+  box-sizing: border-box;
+}
+
+/* 애니메이션 지연 시간 설정 (순차적 표시) */
+.scroll-down-indicator span:nth-of-type(1) {
+  top: -5px; /* 첫 번째 쉐브론 위치 */
+  animation-delay: 0s;
+}
+
+.scroll-down-indicator span:nth-of-type(2) {
+  top: 5px; /* 두 번째 쉐브론 위치 */
+  animation-delay: 0.3s;
+}
+
+.scroll-down-indicator span:nth-of-type(3) {
+  top: 15px; /* 세 번째 쉐브론 위치 */
+  animation-delay: 0.6s;
+}
+
+/* 스크롤 다운 애니메이션 키프레임 */
+@keyframes scrollDownPulse {
+  0% {
+    opacity: 0;
+    transform: rotate(-45deg) translate(0, 0);
+  }
+  50% {
+    opacity: 1; /* 나타남 */
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(-45deg) translate(10px, 10px); /* 약간 아래로 이동하며 사라짐 */
+  }
+}
+
+/* ⚠️ 기존 오디오 컨트롤의 초기 상태를 '재생' 아이콘으로 명확히 설정 */
+/* (JavaScript에서도 설정하지만 CSS로도 명시 가능) */
+#audioControl::before {
+  /* content: "▶️"; */ /* JS에서 직접 텍스트를 바꾸므로 여기선 불필요 */
+}
+
+#controlButton {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 2em; /* 픽셀 단위 또는 다른 단위를 사용할 수 있음 */
+  height: 2em;
+
+  z-index: 1000;
+  cursor: pointer;
+  /* 초기에 버튼은 숨김 처리 */
+}
+
+.who-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+.who-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: clamp(18px, 3.0vw, 24px); /* 반응형 폰트 크기 */
+  letter-spacing: 0.1em;
+  white-space: nowrap; /* 텍스트 개행 방지 */
+}
+
+.parent,
+.child {
+  display: inline-flex;
+  justify-content: center;
+  min-width: fit-content; /* 텍스트 길이에 맞는 너비 */
+  padding: 0 10px;
+}
+
+.separator {
+  display: inline-flex;
+  justify-content: center;
+  width: 2em; /* 고정 너비로 정렬 보장 */
+}
+
+.childType {
+  display: inline-flex;
+  justify-content: center;
+  width: 4em; /* 아들/딸 중앙 정렬 및 고정 너비 */
+}
+
+.highlight {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* 모바일 최적화 */
+@media (max-width: 600px) {
+  .row {
+    font-size: clamp(14px, 2.5vw, 16px);
+    max-width: 90%;
+  }
+}
+
+
+    /* 1) 전체 화면을 덮는 오버레이 */
+    #intro-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      z-index: 9999;
+      /* bg 페이드용 애니메이션 */
+      animation: bgFade 2s forwards;
+      /* 페이드아웃을 위해 준비 (JS에서 opacity 조절) */
+      transition: opacity 1s ease;
+    }
+
+@font-face {
+    font-family: 'OwnglyphMoogungChae';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/OwnglyphMoogungChae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+    /* 2) 텍스트 초기 숨김 */
+    #intro-overlay h2 {
+      font-size: 2.0rem;
+      /*font-family: "S-CoreDream-4Regular";*/
+      font-family: "OwnglyphMoogungChae";
+      color: #333;
+      opacity: 0;
+      /* 2초 지연 후 텍스트 페이드인 */
+      animation: textFade 2s 2s forwards;
+    }
+
+    /* 백그라운드 색 변화 (흰색 → #E8DFDF) */
+    @keyframes bgFade {
+      from { background: #ffffff; }
+      to   { background: #E8DFDF; }
+    }
+    /* 텍스트 불투명도 변화 (0 → 1) */
+    @keyframes textFade {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }

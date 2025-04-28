@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta property="og:url" content="https://han77yb.github.io" />
+	<meta property="og:title" content="한영💖혜빈의 모바일 청첩장" />
+	<meta property="og:description" content="2025년 6월 14일 토요일 오후 12시 63빌딩 58F 터치더스카이" />
+	<meta property="og:type" content="website" />
+	<meta property="og:image" content="https://han77yb.github.io/picture/th01.png" />
+    <meta property="og:site_name" content="한영💖혜빈의 모바일 청첩장" />
+    <title>한영💖혜빈의 모바일 청첩장</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  </head>
+  <body>
+    <!-- ✨ 오버레이 내부 수정 ✨ -->
+    <!--div id="autoplay-overlay">
+      <div class="overlay-content">
+        <p>스크롤하여, 청첩장을 확인해주세요.</p>
+        <div class="scroll-down-indicator">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div-->
+    <!-- 오디오 컨트롤 위젯 컨테이너 (화면 고정용) -->
+    <!--div id="audio-widget-container">
+      <div class="audio-text-info">
+        <span class="audio-label">BGM 재생🎵</span>
+        <span class="song-title">Part of Life - Infraction</span>
+      </div>
+      <div class="audio-control" id="audioControl"></div>
+    </div-->
+
+    <!-- 오디오 요소는 그대로 둡니다 -->
+    <!--audio id="bgm" src="./bgm/Infraction-Music-Part-of-Life-pr.mp3"></audio-->
+	<audio id="bgm" src="./bgm/Talk_Love_by_k_will_piano_cut2.mp3"></audio>	
+    <img id="controlButton" src="./picture/stop.png" alt="음악 컨트롤 버튼" />
+
+    <script>
+      const bgm = document.getElementById("bgm");
+      const controlButton = document.getElementById("controlButton");
+      let musicStarted = false;
+
+      // 스크롤 이벤트로 음악 재생 (한 번만 실행되도록)
+      function startMusic() {
+        if (!musicStarted) {
+          // 스크롤이 사용자 인터랙션으로 판단되어 재생 시작
+          bgm.play().catch((error) => {
+            console.error("음악 재생 실패:", error);
+          });
+          controlButton.style.display = "block";
+          musicStarted = true;
+          // 더 이상 스크롤 이벤트를 감지하지 않도록 제거
+          window.removeEventListener("scroll", startMusic);
+        }
+      }
+      window.addEventListener("scroll", startMusic);
+
+      // 재생/일시정지 버튼 클릭 이벤트
+      controlButton.addEventListener("click", function () {
+        if (!bgm.paused) {
+          // 음악이 재생 중이면 일시정지
+          bgm.pause();
+          controlButton.src = "./picture/play.png";
+        } else {
+          // 음악이 일시정지 상태이면 재생
+          bgm.play().catch((error) => {
+            console.error("음악 재생 실패:", error);
+          });
+          controlButton.src = "./picture/stop.png";
+        }
+      });
+    </script>
+
+  <div id="intro-overlay">
+    <h2>우리 결혼합니다 <span style="font-family:'S-CoreDream-4Regular';">♥</span></h2>
+  </div>
+
+  <script>
+    // 페이지가 로드되고, 애니메이션(2s bg + 2s text)이 끝난 뒤 1초 후에 오버레이를 사라지게
+    window.addEventListener('DOMContentLoaded', () => {
+      // 4초(2초 배경 + 2초 텍스트) 뒤에 페이드아웃 시작
+      setTimeout(() => {
+        const overlay = document.getElementById('intro-overlay');
+        overlay.style.opacity = '0';
+        // 1초(transition) 후 완전히 DOM에서 제거
+        setTimeout(() => overlay.remove(), 1000);
+      }, 4000);
+    });
+  </script>
+
+
+    <div class="fullscreen-image">
+      <img src="picture/pic01.png" alt="청첩장 첫 사진" />
+      <div id="falling-container"></div>
+      <!--div class="wedding-text">Wedding</div-->
+      <div class="names-container">
+        <div class="name-block">
+          <!--div class="name english">Hyebin</div-->
+          <!--div class="name korean">한혜빈</div-->
+        </div>
+        <!--div class="divider"></div-->
+        <div class="name-block">
+          <!--div class="name english">Hanyoung</div-->
+          <!--div class="name korean">김한영</div-->
+        </div>
+      </div>
+      <div class="date-text" style="font-weight: 500;">2025. 06. 14. SAT.</div>
+      <div class="place-text" style="font-weight: 500;">63빌딩 58F 터치더스카이</div>
+    </div>
+    <section>
+      <!--div><img class="custom-picture0" src="picture/flower.png" style="max-width: calc(3rem + 1.5vw);" /></div-->
+      <!--div class="custom-text" style="margin-bottom: 0; color: #8378d1;"><span>To me, you are perfect</span></div-->
+      <div class="custom-text" style="font-size: calc(1rem + 0.7vw); font-weight: bold; margin-top: 0;"><span>내게 당신은 완벽한 사람이에요</span></div>
+      <br />
+      <div class="custom-text"><span>우연처럼 다가와</span></div>
+      <div class="custom-text"><span>어느덧 삶의 가장 큰 이유가 된 사람</span></div>
+      <br />
+      <div class="custom-text"><span>그대를 향한 마음은</span></div>
+      <div class="custom-text"><span>어제보다 오늘 더 깊어지고</span></div>
+      <br />
+      <div class="custom-text"><span>함께할 내일 속에서 </span></div>
+      <div class="custom-text"><span>더욱 아름답게 피어날 것입니다.</span></div>
+      <br />
+      <div class="custom-text"><span>서로에게 가장 완벽한 선물인 우리,</span></div>
+      <div class="custom-text"><span>그 소중한 시작을 함께 축복해 주세요.</span></div>
+    </section>
+    <section>
+      <!--div><img class="custom-picture0" src="picture/flower2.png" style="max-width: calc(3rem + 1.5vw);" /></div-->
+      <!--div class="custom-text" style="margin-bottom: 0px; color: #cb8c8c;"><span>Bless our journey together</span></div-->
+      <div class="custom-text" style="font-size: calc(1rem + 0.7vw); font-weight: bold; margin-top: 0px;"><span>저희의 약속을 축복해 주세요</span></div>
+      <br />
+      <div class="custom-text"><span>따스한 사랑 안에서 저희 두 사람,</span></div>
+      <div class="custom-text"><span>이제 서로의 가장 소중한 벗이 되어</span></div>
+      <div class="custom-text"><span>아름다운 동행을 시작하려 합니다.</span></div>
+      <br />
+      <div class="custom-text"><span>언제나 곁에서 아껴주시고 응원해주신</span></div>
+      <div class="custom-text"><span>모든 분들의 마음에 진심으로 감사드립니다.</span></div>
+      <br />
+      <div class="custom-text"><span>그 사랑과 축복을 가슴에 새기고</span></div>
+      <div class="custom-text"><span>서로 아끼며 예쁜 가정을 이루겠습니다.</span></div>
+      <br />
+      <div class="custom-text"><span>앞으로 저희가 만들어갈 행복한 날들을</span></div>
+      <div class="custom-text"><span>따뜻한 시선으로 지켜봐 주세요.</span></div>
+      <!--div class="image-gallery-container">
+        <div class="gallery-thumbnail">
+          <img class="custom-picture" src="picture/m01.png" alt="갤러리 이미지 1" />
+        </div>
+        <div class="gallery-thumbnail">
+          <img class="custom-picture" src="picture/m02.png" alt="갤러리 이미지 2" />
+        </div>
+        <div class="gallery-thumbnail">
+          <img class="custom-picture" src="picture/m03.png" alt="갤러리 이미지 3" />
+        </div>
+        <div class="custom-textb" style="font-size: calc(0.6rem + 0.4vw);"><span>(우리사진, 애니메이션 감성으로 담아봤어요)</span></div>
+      </div>
+      <div class="modal-overlay" id="imageModalOverlay">
+        <div class="modal image-modal-content" id="imageModal">
+          <img id="modalImage" src="" alt="확대된 이미지" />
+          <button class="close-modal-button" aria-label="닫기">×</button>
+        </div>
+      </div-->
+    </section>
+
+    <section>
+      <!--div class="custom-text" style="color: #a7c1ba; letter-spacing: calc(0.6rem + 0.3vw); font-size: calc(1.2rem + 0.6vw); font-weight: 700;">
+        <span>🤵👰ABOUT US</span>
+      </div-->
+      <div class="simple_line"></div>
+      <div class="who-section">
+        <div class="row">
+          <span class="parent highlight">김태일 ‧ 안숙자</span>
+          <span class="separator">의</span>
+          <span class="childType">아들</span>
+          <span class="child highlight">김한영</span>
+        </div>
+      </div>
+      <br />
+      <div class="who-section">
+        <div class="row">
+          <span class="parent highlight">한수덕 ‧ 천부순</span>
+          <span class="separator">의</span>
+          <span class="childType">딸</span>
+          <span class="child highlight">한혜빈</span>
+        </div>
+      </div>
+
+	  
+      <div class="simple_line"></div>
+      <div id="main-content">
+        <button class="contact-button" id="openModalButton" style="background-color: #fff;color: #D1C8C8;border: 2px solid #D1C8C8;border-radius: 5em;">연락하기</button>
+      </div>
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+          <h2>연락하기</h2>
+          <div class="contact-list">
+            <div class="contact-group">
+              <div class="contact-item">
+                <span class="contact-label">신랑</span>
+                <span class="contact-name">김한영</span>
+                <div class="contact-actions">
+                  <a href="http://pf.kakao.com/_CxbxiPn/chat"><img class="contact-picture2" src="picture/talk01.png" /></a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <span class="contact-label">신랑 아버지</span>
+                <span class="contact-name">김태일</span>
+                <div class="contact-actions">
+                  <a href="http://qr.kakao.com/talk/E96K4kbH8ramlyk0uMNQSIoYkFk-"><img class="contact-picture2" src="picture/talk01.png" /></a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <span class="contact-label">신랑 어머니</span>
+                <span class="contact-name">안숙자</span>
+                <div class="contact-actions">
+                  <a href="http://qr.kakao.com/talk/vVHPjjM.r.x36hBvmbW3Wl.vyPo-"><img class="contact-picture2" src="picture/talk01.png" /></a>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="contact-group bride">
+              <div class="contact-item">
+                <span class="contact-label-bride">신부</span>
+                <span class="contact-name">한혜빈</span>
+                <div class="contact-actions">
+                  <a href="http://qr.kakao.com/talk/vlIoc7iV0ZQtOsOhXYy.TIEmEH4-"><img class="contact-picture2" src="picture/talk02.png" /></a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <span class="contact-label-bride">신부 아버지</span>
+                <span class="contact-name">한수덕</span>
+                <div class="contact-actions">
+                  <a href="http://qr.kakao.com/talk/vlIoc7iV0ZQtOsOhXYy.TIEmEH4-"><img class="contact-picture2" src="picture/talk02.png" /></a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <span class="contact-label-bride">신부 어머니</span>
+                <span class="contact-name">천부순</span>
+                <div class="contact-actions">
+                  <a href="http://qr.kakao.com/talk/xTR5ow7V7XS9a4fxtW3IFHPBZ2E-"><img class="contact-picture2" src="picture/talk02.png" /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        const openModalButton = document.getElementById("openModalButton");
+        const modalOverlay = document.getElementById("modalOverlay");
+        const mainContent = document.getElementById("main-content");
+
+        openModalButton.addEventListener("click", () => {
+          modalOverlay.classList.add("active");
+        });
+
+        modalOverlay.addEventListener("click", (e) => {
+          if (e.target === modalOverlay) {
+            modalOverlay.classList.remove("active");
+          }
+        });
+      </script>
+    </section>
+    <section>
+      <div class="custom-text" style="color: #C0B4B4; letter-spacing: calc(0.4rem + 0.2vw); font-size: calc(1.2rem + 0.6vw); font-weight: 400;"><span>일정</span></div>
+      <br />
+      <div class="custom-textb" style="font-size: calc(0.6rem + 0.3vw); font-weight: 700;"><span>작은 결혼식으로 준비되어, 초대 인원이 한정되어 있습니다.</span></div>
+      <div class="custom-textb" style="font-size: calc(0.6rem + 0.3vw); font-weight: 700;"><span>너른 마음으로 양해 부탁드립니다.</span></div>
+      <br />
+      <br />
+      <div><img class="custom-picture0" src="picture/caldate.png" width="150" /></div>
+      <div class="simple_line"></div>
+      <div><img class="custom-picture0" src="picture/cal.png" /></div>
+      <div class="simple_line"></div>
+    </section>
+    <section id="gallery-slider">
+      <div class="custom-text" style="color: #C0B4B4; letter-spacing: calc(0.4rem + 0.2vw); font-size: calc(1.2rem + 0.6vw); font-weight: 700;">
+        <span>사진첩</span>
+      </div>
+      <div class="gallery-container">
+        <div class="gallery-wrapper">
+          <div class="gallery-slide">
+            <img class="custom-picture visible" src="picture/gal02.png" alt="Photo 1" draggable="false" ondragstart="return false;" style="transition: opacity 0s ease;" />
+          </div>
+          <div class="gallery-slide">
+            <img class="custom-picture" src="picture/gal04.png" alt="Photo 2" draggable="false" ondragstart="return false;" style="transition: opacity 0s ease;" />
+          </div>
+          <div class="gallery-slide">
+            <img class="custom-picture" src="picture/gal01.png" alt="Photo 3" draggable="false" ondragstart="return false;" style="transition: opacity 0s ease;" />
+          </div>
+          <div class="gallery-slide">
+            <img class="custom-picture" src="picture/gal03.png" alt="Photo 4" draggable="false" ondragstart="return false;" style="transition: opacity 0s ease;" />
+          </div>
+        </div>
+        <div class="indicator-container">
+          <div class="indicator active"></div>
+          <div class="indicator"></div>
+          <div class="indicator"></div>
+          <div class="indicator"></div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="custom-text" style="color: #C0B4B4; letter-spacing: calc(0.4rem + 0.2vw); font-size: calc(1.2rem + 0.6vw); font-weight: 700;"><span>축하 메시지</span><br /></div>
+      <div class="custom-textb"><span> 신랑, 신부에게 축하의 글을 남겨보세요</span></div>
+      <br />
+      <div class="custom-textb" style="color: #ced4da; font-size: calc(0.8rem + 0.6vw);">
+        <span>
+          (다른 사람은 볼수 없으며, <br />
+          신랑 신부만 확인이 가능합니다)
+        </span>
+        <br />
+      </div>
+      <form onsubmit="submitData(event)">
+        <input type="text" id="name" placeholder="이름을 입력하세요" required style="font-family: 'S-CoreDream-4Regular';" />
+        <textarea id="value" rows="4" placeholder="축하 메시지를 입력하세요" required style="font-family: 'S-CoreDream-4Regular';"></textarea>
+        <button type="submit" style="background-color: #fff;color: #D1C8C8;border: 2px solid #D1C8C8;border-radius: 5em;">작성</button>
+      </form>
+    </section>
+
+    <div class="modal-overlay" id="confirmationModalOverlay">
+      <div class="modal" id="confirmationModal">
+        <p id="confirmationMessage" style="margin-top: 10px; margin-bottom: 10px; font-size: 1.1em;">메시지가 성공적으로 작성되었습니다!</p>
+      </div>
+    </div>
+
+    <section>
+      <div class="custom-text" style="color: #C0B4B4; letter-spacing: calc(0.4rem + 0.2vw); font-size: calc(1.2rem + 0.6vw); font-weight: 700;">
+        <br />
+        <br />
+        <br />
+        <span>마음을 전하실 곳</span>
+      </div>
+      <div class="accordion">
+        <button onclick="toggleAccordion(this)">신랑측 계좌번호 확인하기</button>
+        <div class="accordion-content">
+          <div class="account-item">
+            <label>예금주: 김한영</label>
+            <div class="account-info">
+              <input value="ㅤ기업은행 010-2923-3841" readonly />
+              <button class="button" onclick="copyToClipboard('기업은행 010-2923-3841')">복사하기</button>
+            </div>
+          </div>
+          <div class="account-item">
+            <label>예금주: 김태일</label>
+            <div class="account-info">
+              <input value="ㅤ우리은행 755-0812-3358" readonly />
+              <button class="button" onclick="copyToClipboard('우리은행 755-0812-3358')">복사하기</button>
+            </div>
+          </div>
+          <div class="account-item">
+            <label>예금주: 안숙자</label>
+            <div class="account-info">
+              <input value="ㅤ농협은행 817-0217-4831" readonly />
+              <button class="button" onclick="copyToClipboard('농협은행 817-0217-4831')">복사하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion">
+        <button onclick="toggleAccordion(this)">신부측 계좌번호 확인하기</button>
+        <div class="accordion-content">
+          <div class="account-item">
+            <label>예금주: 한혜빈</label>
+            <div class="account-info">
+              <input value="ㅤ새마을 9003-2050-7543-1" readonly />
+              <button class="button" onclick="copyToClipboard('새마을 9003-2050-7543-1')">복사하기</button>
+            </div>
+          </div>
+          <div class="account-item">
+            <label>예금주: 천부순</label>
+            <div class="account-info">
+              <input value="ㅤ농협 351-0446-065733" readonly />
+              <button class="button" onclick="copyToClipboard('농협 351-0446-065733')">복사하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <br />
+    <br />
+    <br />
+          <div class="custom-text" style="color: #000; font-size: calc(0.9rem + 0.45vw); font-family: Arial, sans-serif; margin-top: 30px;">
+            <!--span>🎁</span-->
+            <span>
+              축의금을 전해주신 분들께<br />
+              작은 답례의 마음을 전하고자 합니다.
+            </span>
+          </div>
+          <div class="accordion">
+		  		  <button onclick="location.href='https://forms.gle/Yo2xjHM6QdpTUaVU8'"; style="text-align:center; width: 70%;">답례품 신청하기</button>
+          </div>
+
+		  
+    </section>
+    <br />
+    <br />
+
+    <script>
+      // Kakao SDK 초기화 (받은 JavaScript 키 사용)
+      Kakao.init("1fac1894516271fa3219bb9e0c27f72b");
+
+      function shareKakao() {
+        Kakao.Link.sendDefault({
+          objectType: "feed",
+          content: {
+            title: "김한영 ♥ 한혜빈 결혼합니다",
+            description: "두 사람의 사랑과 새로운 시작을 축하해 주세요! 2025년 6월 14일 토요일 오후 12시 63빌딩 58F 터치더스카이",
+            imageUrl: "https://han77yb.github.io/picture/th01.png",
+            link: {
+              mobileWebUrl: window.location.href,
+              webUrl: window.location.href,
+            },
+          },
+          buttons: [
+            {
+              title: "자세히 보기",
+              link: {
+                mobileWebUrl: window.location.href,
+                webUrl: window.location.href,
+              },
+            },
+          ],
+        });
+      }
+
+      function copyLink() {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(
+          function () {
+            alert("링크가 복사되었습니다!");
+          },
+          function (err) {
+            alert("링크 복사에 실패했습니다.");
+          }
+        );
+      }
+    </script>
+    <script>
+      // 슬라이더 동작: PC에서 마우스 휠 이벤트로 슬라이드 전환
+      (function () {
+        const galleryContainer = document.querySelector("#gallery-slider .gallery-container");
+        const slider = document.querySelector("#gallery-slider .gallery-wrapper");
+        const slides = document.querySelectorAll("#gallery-slider .gallery-slide");
+        const totalSlides = slides.length;
+        let currentIndex = 0;
+        let isThrottled = false; // 과도한 휠 이벤트 발생 방지
+
+        function updateIndicators() {
+          const indicators = document.querySelectorAll("#gallery-slider .indicator");
+          indicators.forEach((indicator, index) => {
+            indicator.classList.toggle("active", index === currentIndex);
+          });
+        }
+
+        galleryContainer.addEventListener("wheel", (e) => {
+          e.preventDefault(); // 갤러리 내 스크롤 기본 동작 방지
+
+          if (isThrottled) return;
+          isThrottled = true;
+          setTimeout(() => {
+            isThrottled = false;
+          }, 600); // 애니메이션 시간보다 약간 여유있게 throttle
+
+          if (e.deltaY > 0) {
+            // 휠 아래: 다음 슬라이드
+            if (currentIndex < totalSlides - 1) {
+              currentIndex++;
+            }
+          } else if (e.deltaY < 0) {
+            // 휠 위: 이전 슬라이드
+            if (currentIndex > 0) {
+              currentIndex--;
+            }
+          }
+          slider.style.transition = "transform 0.5s ease";
+          slider.style.transform = "translateX(-" + currentIndex * 100 + "%)";
+          updateIndicators();
+        });
+      })();
+    </script>
+    <footer>
+      <center>
+        <div class="share-container">
+          <div style="font-size: calc(1rem + 0.5vw);">청첩장 공유하기</div>
+          <br />
+          <div style="font-size: calc(0.75rem + 0.35vw);">소중한 분들께 저희의 결혼 소식을 전해주세요</div>
+          <br />
+          <div class="share-buttons">
+            <button class="btn btn-copy" onclick="copyLink()" style="font-size: calc(0.7rem + 0.35vw);" ;>
+              URL<br />
+              복사하기
+            </button>
+            <button class="btn btn-kakao" onclick="shareKakao()" style="font-size: calc(0.7rem + 0.35vw);" ;>
+              카카오톡<br />
+              공유하기
+            </button>
+          </div>
+        </div>
+      </center>
+      <!--p>2025.06.14 한영 혜빈의 모바일 청첩장</p-->
+    </footer>
+  </body>
+</html>
